@@ -377,11 +377,6 @@ selected_mbti = st.selectbox(
     index=0
 )
 
-nickname = st.text_input(
-    "닉네임을 입력해도 좋아요! 선택 사항이에요 📝",
-    placeholder="예: 피카피카"
-)
-
 recommend_button = st.button("나의 포켓몬 찾기! 🎁", use_container_width=True)
 
 # =========================
@@ -397,14 +392,10 @@ if recommend_button:
 
     image_url = get_pokemon_image(pokemon_number)
     types = get_pokemon_type(pokemon_name)
-    korean_types = [type_to_korean(t) for t in types]
 
     st.balloons()
 
-    if nickname.strip():
-        st.success(f"🎉 {nickname}님의 찰떡 포켓몬을 찾았어요!")
-    else:
-        st.success("🎉 당신의 찰떡 포켓몬을 찾았어요!")
+    st.success("🎉 당신의 찰떡 포켓몬을 찾았어요!")
 
     st.markdown(
         f"""
@@ -419,7 +410,7 @@ if recommend_button:
 
     st.image(image_url, width=280)
 
-    if korean_types:
+    if types:
         type_text = " ".join(
             [f"{type_to_emoji(t)} {type_to_korean(t)}" for t in types]
         )
