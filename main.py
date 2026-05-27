@@ -92,6 +92,18 @@ st.markdown(
         text-align: center;
         box-shadow: 0 4px 14px rgba(0,0,0,0.08);
         border: 2px solid #edf2ff;
+        min-height: 290px;
+    }
+
+    .friend-mbti {
+        display: inline-block;
+        background-color: #fff0f6;
+        color: #c2255c;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 13px;
+        margin-top: 6px;
     }
 
     .footer {
@@ -255,18 +267,91 @@ pokemon_data = {
     }
 }
 
+# =========================
 # 보너스 추천용 포켓몬
+# 포켓몬마다 잘 맞는 MBTI도 함께 표시
+# =========================
 bonus_pokemon = [
-    {"name": "꼬부기", "eng": "Squirtle", "number": 7, "emoji": "💧"},
-    {"name": "이상해씨", "eng": "Bulbasaur", "number": 1, "emoji": "🌱"},
-    {"name": "파이리", "eng": "Charmander", "number": 4, "emoji": "🔥"},
-    {"name": "푸린", "eng": "Jigglypuff", "number": 39, "emoji": "🎤"},
-    {"name": "고라파덕", "eng": "Psyduck", "number": 54, "emoji": "🤯"},
-    {"name": "나옹", "eng": "Meowth", "number": 52, "emoji": "🐱"},
-    {"name": "토게피", "eng": "Togepi", "number": 175, "emoji": "🥚"},
-    {"name": "마릴", "eng": "Marill", "number": 183, "emoji": "🫧"},
-    {"name": "치코리타", "eng": "Chikorita", "number": 152, "emoji": "🍃"},
-    {"name": "브케인", "eng": "Cyndaquil", "number": 155, "emoji": "🌋"},
+    {
+        "name": "꼬부기",
+        "eng": "Squirtle",
+        "number": 7,
+        "emoji": "💧",
+        "mbti": "ISFJ",
+        "reason": "차분하고 다정하게 곁을 지켜주는 성향과 잘 어울려요."
+    },
+    {
+        "name": "이상해씨",
+        "eng": "Bulbasaur",
+        "number": 1,
+        "emoji": "🌱",
+        "mbti": "INFJ",
+        "reason": "조용하지만 따뜻한 성장 에너지가 닮았어요."
+    },
+    {
+        "name": "파이리",
+        "eng": "Charmander",
+        "number": 4,
+        "emoji": "🔥",
+        "mbti": "ESTP",
+        "reason": "활발하고 도전을 즐기는 불꽃 같은 성향과 찰떡이에요."
+    },
+    {
+        "name": "푸린",
+        "eng": "Jigglypuff",
+        "number": 39,
+        "emoji": "🎤",
+        "mbti": "ESFP",
+        "reason": "사람들 앞에서 매력을 뽐내는 분위기 메이커와 잘 맞아요."
+    },
+    {
+        "name": "고라파덕",
+        "eng": "Psyduck",
+        "number": 54,
+        "emoji": "🤯",
+        "mbti": "INTP",
+        "reason": "엉뚱하지만 생각이 많은 탐구형 성향과 귀엽게 어울려요."
+    },
+    {
+        "name": "나옹",
+        "eng": "Meowth",
+        "number": 52,
+        "emoji": "🐱",
+        "mbti": "ENTP",
+        "reason": "재치 있고 장난기 많은 성향과 케미가 좋아요."
+    },
+    {
+        "name": "토게피",
+        "eng": "Togepi",
+        "number": 175,
+        "emoji": "🥚",
+        "mbti": "ENFP",
+        "reason": "밝고 사랑스러운 에너지가 잘 통하는 조합이에요."
+    },
+    {
+        "name": "마릴",
+        "eng": "Marill",
+        "number": 183,
+        "emoji": "🫧",
+        "mbti": "ISFP",
+        "reason": "부드럽고 감성적인 분위기가 잘 어울려요."
+    },
+    {
+        "name": "치코리타",
+        "eng": "Chikorita",
+        "number": 152,
+        "emoji": "🍃",
+        "mbti": "INFP",
+        "reason": "순수하고 따뜻한 마음을 가진 성향과 잘 맞아요."
+    },
+    {
+        "name": "브케인",
+        "eng": "Cyndaquil",
+        "number": 155,
+        "emoji": "🌋",
+        "mbti": "ISTP",
+        "reason": "조용하지만 필요할 때 강한 힘을 내는 모습이 닮았어요."
+    },
 ]
 
 # =========================
@@ -362,6 +447,7 @@ with st.sidebar:
     st.write("1. 자신의 MBTI를 선택해요.")
     st.write("2. 추천 버튼을 눌러요.")
     st.write("3. 나와 어울리는 포켓몬을 확인해요!")
+    st.write("4. 보너스 친구 포켓몬과 잘 맞는 MBTI도 확인해요! 🎁")
     st.write("")
     st.info("이 앱은 재미용 추천 앱이에요. MBTI 결과가 절대적인 성격 판단은 아니에요! 😊")
 
@@ -449,7 +535,11 @@ if recommend_button:
 
     st.divider()
 
+    # =========================
+    # 보너스 친구 포켓몬 추천
+    # =========================
     st.subheader("🎁 보너스 친구 포켓몬 추천")
+    st.caption("이 친구들과 잘 맞는 MBTI도 함께 알려드려요! 🧡")
 
     random_bonus = random.sample(bonus_pokemon, 3)
     cols = st.columns(3)
@@ -457,9 +547,23 @@ if recommend_button:
     for col, bonus in zip(cols, random_bonus):
         with col:
             st.markdown('<div class="small-card">', unsafe_allow_html=True)
+
             st.image(get_pokemon_image(bonus["number"]), width=120)
+
             st.write(f"### {bonus['emoji']} {bonus['name']}")
             st.caption(f"No. {bonus['number']}")
+
+            st.markdown(
+                f"""
+                <div class="friend-mbti">
+                잘 맞는 MBTI: {bonus["mbti"]}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            st.write(f"💬 {bonus['reason']}")
+
             st.markdown('</div>', unsafe_allow_html=True)
 
 else:
