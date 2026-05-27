@@ -92,7 +92,7 @@ st.markdown(
         text-align: center;
         box-shadow: 0 4px 14px rgba(0,0,0,0.08);
         border: 2px solid #edf2ff;
-        min-height: 290px;
+        min-height: 390px;
     }
 
     .friend-mbti {
@@ -104,6 +104,19 @@ st.markdown(
         font-weight: 800;
         font-size: 13px;
         margin-top: 6px;
+        margin-bottom: 4px;
+    }
+
+    .bad-mbti {
+        display: inline-block;
+        background-color: #f1f3f5;
+        color: #495057;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-weight: 800;
+        font-size: 13px;
+        margin-top: 4px;
+        margin-bottom: 6px;
     }
 
     .footer {
@@ -269,7 +282,7 @@ pokemon_data = {
 
 # =========================
 # 보너스 추천용 포켓몬
-# 포켓몬마다 잘 맞는 MBTI도 함께 표시
+# 잘 맞는 MBTI, 잘 맞지 않는 MBTI 포함
 # =========================
 bonus_pokemon = [
     {
@@ -277,80 +290,100 @@ bonus_pokemon = [
         "eng": "Squirtle",
         "number": 7,
         "emoji": "💧",
-        "mbti": "ISFJ",
-        "reason": "차분하고 다정하게 곁을 지켜주는 성향과 잘 어울려요."
+        "good_mbti": "ISFJ",
+        "bad_mbti": "ENTP",
+        "good_reason": "차분하고 다정하게 곁을 지켜주는 성향과 잘 어울려요.",
+        "bad_reason": "꼬부기는 안정적인 분위기를 좋아해서 너무 즉흥적이고 장난기 많은 성향과는 가끔 삐걱거릴 수 있어요."
     },
     {
         "name": "이상해씨",
         "eng": "Bulbasaur",
         "number": 1,
         "emoji": "🌱",
-        "mbti": "INFJ",
-        "reason": "조용하지만 따뜻한 성장 에너지가 닮았어요."
+        "good_mbti": "INFJ",
+        "bad_mbti": "ESTP",
+        "good_reason": "조용하지만 따뜻한 성장 에너지가 닮았어요.",
+        "bad_reason": "이상해씨는 천천히 성장하는 스타일이라 빠른 자극과 모험을 좋아하는 성향과는 속도가 다를 수 있어요."
     },
     {
         "name": "파이리",
         "eng": "Charmander",
         "number": 4,
         "emoji": "🔥",
-        "mbti": "ESTP",
-        "reason": "활발하고 도전을 즐기는 불꽃 같은 성향과 찰떡이에요."
+        "good_mbti": "ESTP",
+        "bad_mbti": "ISFJ",
+        "good_reason": "활발하고 도전을 즐기는 불꽃 같은 성향과 찰떡이에요.",
+        "bad_reason": "파이리의 뜨거운 도전 정신이 조심스럽고 안정적인 성향에게는 조금 부담스러울 수 있어요."
     },
     {
         "name": "푸린",
         "eng": "Jigglypuff",
         "number": 39,
         "emoji": "🎤",
-        "mbti": "ESFP",
-        "reason": "사람들 앞에서 매력을 뽐내는 분위기 메이커와 잘 맞아요."
+        "good_mbti": "ESFP",
+        "bad_mbti": "INTJ",
+        "good_reason": "사람들 앞에서 매력을 뽐내는 분위기 메이커와 잘 맞아요.",
+        "bad_reason": "푸린은 관심과 리액션을 좋아해서 너무 냉정하고 분석적인 성향과는 서운함이 생길 수 있어요."
     },
     {
         "name": "고라파덕",
         "eng": "Psyduck",
         "number": 54,
         "emoji": "🤯",
-        "mbti": "INTP",
-        "reason": "엉뚱하지만 생각이 많은 탐구형 성향과 귀엽게 어울려요."
+        "good_mbti": "INTP",
+        "bad_mbti": "ESTJ",
+        "good_reason": "엉뚱하지만 생각이 많은 탐구형 성향과 귀엽게 어울려요.",
+        "bad_reason": "고라파덕의 느긋하고 엉뚱한 모습이 계획과 효율을 중시하는 성향에게는 답답하게 느껴질 수 있어요."
     },
     {
         "name": "나옹",
         "eng": "Meowth",
         "number": 52,
         "emoji": "🐱",
-        "mbti": "ENTP",
-        "reason": "재치 있고 장난기 많은 성향과 케미가 좋아요."
+        "good_mbti": "ENTP",
+        "bad_mbti": "ISTJ",
+        "good_reason": "재치 있고 장난기 많은 성향과 케미가 좋아요.",
+        "bad_reason": "나옹의 즉흥적이고 능청스러운 태도가 규칙과 원칙을 중요하게 생각하는 성향과는 잘 안 맞을 수 있어요."
     },
     {
         "name": "토게피",
         "eng": "Togepi",
         "number": 175,
         "emoji": "🥚",
-        "mbti": "ENFP",
-        "reason": "밝고 사랑스러운 에너지가 잘 통하는 조합이에요."
+        "good_mbti": "ENFP",
+        "bad_mbti": "ENTJ",
+        "good_reason": "밝고 사랑스러운 에너지가 잘 통하는 조합이에요.",
+        "bad_reason": "토게피는 순수하고 느긋한 분위기라 목표 중심적이고 빠른 결정을 좋아하는 성향과는 템포가 다를 수 있어요."
     },
     {
         "name": "마릴",
         "eng": "Marill",
         "number": 183,
         "emoji": "🫧",
-        "mbti": "ISFP",
-        "reason": "부드럽고 감성적인 분위기가 잘 어울려요."
+        "good_mbti": "ISFP",
+        "bad_mbti": "ENTJ",
+        "good_reason": "부드럽고 감성적인 분위기가 잘 어울려요.",
+        "bad_reason": "마릴은 감성적이고 여유로운 친구라 강한 추진력과 효율을 중시하는 성향과는 조금 어색할 수 있어요."
     },
     {
         "name": "치코리타",
         "eng": "Chikorita",
         "number": 152,
         "emoji": "🍃",
-        "mbti": "INFP",
-        "reason": "순수하고 따뜻한 마음을 가진 성향과 잘 맞아요."
+        "good_mbti": "INFP",
+        "bad_mbti": "ESTJ",
+        "good_reason": "순수하고 따뜻한 마음을 가진 성향과 잘 맞아요.",
+        "bad_reason": "치코리타는 섬세하고 감정 표현이 중요한 타입이라 지나치게 현실적이고 직설적인 성향과는 상처받을 수 있어요."
     },
     {
         "name": "브케인",
         "eng": "Cyndaquil",
         "number": 155,
         "emoji": "🌋",
-        "mbti": "ISTP",
-        "reason": "조용하지만 필요할 때 강한 힘을 내는 모습이 닮았어요."
+        "good_mbti": "ISTP",
+        "bad_mbti": "ENFJ",
+        "good_reason": "조용하지만 필요할 때 강한 힘을 내는 모습이 닮았어요.",
+        "bad_reason": "브케인은 혼자만의 시간이 필요한 편이라 계속 감정을 나누고 이끌어주려는 성향과는 부담을 느낄 수 있어요."
     },
 ]
 
@@ -358,17 +391,11 @@ bonus_pokemon = [
 # 함수
 # =========================
 def get_pokemon_image(number):
-    """
-    포켓몬 공식 아트워크 이미지 URL을 반환하는 함수
-    """
     return f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{number}.png"
 
 
 @st.cache_data
 def get_pokemon_type(pokemon_name):
-    """
-    PokeAPI에서 포켓몬 타입을 가져오는 함수
-    """
     try:
         url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
         response = requests.get(url, timeout=5)
@@ -446,8 +473,8 @@ with st.sidebar:
     st.header("🎒 사용 방법")
     st.write("1. 자신의 MBTI를 선택해요.")
     st.write("2. 추천 버튼을 눌러요.")
-    st.write("3. 나와 어울리는 포켓몬을 확인해요!")
-    st.write("4. 보너스 친구 포켓몬과 잘 맞는 MBTI도 확인해요! 🎁")
+    st.write("3. 나와 어울리는 포켓몬을 확인해요.")
+    st.write("4. 보너스 친구 포켓몬의 잘 맞는 MBTI와 잘 맞지 않는 MBTI도 확인해요! 🎁")
     st.write("")
     st.info("이 앱은 재미용 추천 앱이에요. MBTI 결과가 절대적인 성격 판단은 아니에요! 😊")
 
@@ -539,7 +566,7 @@ if recommend_button:
     # 보너스 친구 포켓몬 추천
     # =========================
     st.subheader("🎁 보너스 친구 포켓몬 추천")
-    st.caption("이 친구들과 잘 맞는 MBTI도 함께 알려드려요! 🧡")
+    st.caption("잘 맞는 MBTI와 잘 맞지 않는 MBTI를 함께 알려드려요! 단, 재미용이에요 😊")
 
     random_bonus = random.sample(bonus_pokemon, 3)
     cols = st.columns(3)
@@ -556,13 +583,24 @@ if recommend_button:
             st.markdown(
                 f"""
                 <div class="friend-mbti">
-                잘 맞는 MBTI: {bonus["mbti"]}
+                💖 잘 맞는 MBTI: {bonus["good_mbti"]}
                 </div>
                 """,
                 unsafe_allow_html=True
             )
 
-            st.write(f"💬 {bonus['reason']}")
+            st.write(f"💬 {bonus['good_reason']}")
+
+            st.markdown(
+                f"""
+                <div class="bad-mbti">
+                💔 잘 맞지 않는 MBTI: {bonus["bad_mbti"]}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            st.write(f"🌀 {bonus['bad_reason']}")
 
             st.markdown('</div>', unsafe_allow_html=True)
 
